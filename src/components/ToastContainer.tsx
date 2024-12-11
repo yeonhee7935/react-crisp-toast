@@ -5,14 +5,8 @@ import "../styles/toast.css";
 
 interface ToastContainerProps {
   toasts: ToastType[];
-  removeToast: (id: number) => void;
-  position:
-    | "top-left"
-    | "top-right"
-    | "bottom-left"
-    | "bottom-right"
-    | "top-center"
-    | "bottom-center";
+  removeToast: (id: string) => void;
+  position: string;
 }
 
 const ToastContainer: React.FC<ToastContainerProps> = ({

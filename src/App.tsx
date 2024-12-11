@@ -1,116 +1,185 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import { ToastProvider, useToast } from "./context/ToastContext";
 
-const App = () => {
+const ExamplePage: React.FC = () => {
   const { addToast } = useToast();
 
-  // State for user input
-  const [position, setPosition] = useState<
-    | "top-left"
-    | "top-right"
-    | "bottom-left"
-    | "bottom-right"
-    | "top-center"
-    | "bottom-center"
-  >("top-right");
+  const [message, setMessage] = useState("Hello, this is a toast!");
   const [type, setType] = useState<"success" | "error" | "warning" | "info">(
     "info",
   );
-  const [duration, setDuration] = useState<number>(3000);
-  const [message, setMessage] = useState<string>("This is a toast!");
+  const [duration, setDuration] = useState(3000);
+  const [vertical, setVertical] = useState<"top" | "bottom">("top");
+  const [horizontal, setHorizontal] = useState<"left" | "right" | "center">(
+    "right",
+  );
 
-  const handleShowToast = () => {
-    addToast({ message, type, position, duration });
+  const showToast = () => {
+    addToast({
+      message,
+      type,
+      duration,
+      position: { vertical, horizontal },
+    });
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1>Toast Notification Example</h1>
-
-      {/* Toast Message Input */}
-      <label>
-        <strong>Toast Message:</strong>
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+      <h1>Toast Example</h1>
+      <div style={{ marginBottom: "20px" }}>
+        <label>
+          <strong>Message:</strong>
+        </label>
         <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          style={{ marginLeft: "10px", padding: "5px" }}
+          style={{
+            display: "block",
+            width: "100%",
+            padding: "10px",
+            marginTop: "10px",
+            marginBottom: "20px",
+            fontSize: "16px",
+          }}
         />
-      </label>
+      </div>
 
-      <br />
-      <br />
-
-      {/* Position Selector (Radio Buttons) */}
-      <fieldset style={{ marginBottom: "20px" }}>
-        <legend>
-          <strong>Select Position:</strong>
-        </legend>
-        {[
-          "top-left",
-          "top-right",
-          "bottom-left",
-          "bottom-right",
-          "top-center",
-          "bottom-center",
-        ].map((pos) => (
-          <label key={pos} style={{ display: "block", marginBottom: "5px" }}>
-            <input
-              type="radio"
-              name="position"
-              value={pos}
-              checked={position === pos}
-              onChange={(e) => setPosition(e.target.value as any)}
-            />
-            {pos}
-          </label>
-        ))}
-      </fieldset>
-
-      {/* Type Selector (Radio Buttons) */}
-      <fieldset style={{ marginBottom: "20px" }}>
-        <legend>
-          <strong>Select Type:</strong>
-        </legend>
-        {["success", "error", "warning", "info"].map((toastType) => (
-          <label
-            key={toastType}
-            style={{ display: "block", marginBottom: "5px" }}
-          >
+      <div style={{ marginBottom: "20px" }}>
+        <label>
+          <strong>Type:</strong>
+        </label>
+        <div>
+          <label>
             <input
               type="radio"
               name="type"
-              value={toastType}
-              checked={type === toastType}
-              onChange={(e) => setType(e.target.value as any)}
+              value="success"
+              checked={type === "success"}
+              onChange={() => setType("success")}
             />
-            {toastType}
+            Success
           </label>
-        ))}
-      </fieldset>
+          <label style={{ marginLeft: "20px" }}>
+            <input
+              type="radio"
+              name="type"
+              value="error"
+              checked={type === "error"}
+              onChange={() => setType("error")}
+            />
+            Error
+          </label>
+          <label style={{ marginLeft: "20px" }}>
+            <input
+              type="radio"
+              name="type"
+              value="warning"
+              checked={type === "warning"}
+              onChange={() => setType("warning")}
+            />
+            Warning
+          </label>
+          <label style={{ marginLeft: "20px" }}>
+            <input
+              type="radio"
+              name="type"
+              value="info"
+              checked={type === "info"}
+              onChange={() => setType("info")}
+            />
+            Info
+          </label>
+        </div>
+      </div>
 
-      {/* Duration Input */}
-      <label>
-        <strong>Duration (ms):</strong>
+      <div style={{ marginBottom: "20px" }}>
+        <label>
+          <strong>Duration (ms):</strong>
+        </label>
         <input
           type="number"
           value={duration}
-          onChange={(e) => setDuration(parseInt(e.target.value))}
-          style={{ marginLeft: "10px", padding: "5px" }}
+          onChange={(e) => setDuration(parseInt(e.target.value, 10))}
+          style={{
+            display: "block",
+            width: "100%",
+            padding: "10px",
+            marginTop: "10px",
+            fontSize: "16px",
+          }}
         />
-      </label>
+      </div>
 
-      <br />
-      <br />
+      <div style={{ marginBottom: "20px" }}>
+        <label>
+          <strong>Position:</strong>
+        </label>
+        <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+          <strong>Vertical:</strong>
+          <label style={{ marginLeft: "20px" }}>
+            <input
+              type="radio"
+              name="vertical"
+              value="top"
+              checked={vertical === "top"}
+              onChange={() => setVertical("top")}
+            />
+            Top
+          </label>
+          <label style={{ marginLeft: "20px" }}>
+            <input
+              type="radio"
+              name="vertical"
+              value="bottom"
+              checked={vertical === "bottom"}
+              onChange={() => setVertical("bottom")}
+            />
+            Bottom
+          </label>
+        </div>
+        <div>
+          <strong>Horizontal:</strong>
+          <label style={{ marginLeft: "20px" }}>
+            <input
+              type="radio"
+              name="horizontal"
+              value="left"
+              checked={horizontal === "left"}
+              onChange={() => setHorizontal("left")}
+            />
+            Left
+          </label>
+          <label style={{ marginLeft: "20px" }}>
+            <input
+              type="radio"
+              name="horizontal"
+              value="right"
+              checked={horizontal === "right"}
+              onChange={() => setHorizontal("right")}
+            />
+            Right
+          </label>
+          <label style={{ marginLeft: "20px" }}>
+            <input
+              type="radio"
+              name="horizontal"
+              value="center"
+              checked={horizontal === "center"}
+              onChange={() => setHorizontal("center")}
+            />
+            Center
+          </label>
+        </div>
+      </div>
 
-      {/* Show Toast Button */}
       <button
-        onClick={handleShowToast}
+        onClick={showToast}
         style={{
           padding: "10px 20px",
-          backgroundColor: "#007BFF",
-          color: "#FFFFFF",
+          fontSize: "16px",
+          backgroundColor: "#007bff",
+          color: "#fff",
           border: "none",
           borderRadius: "5px",
           cursor: "pointer",
@@ -122,11 +191,9 @@ const App = () => {
   );
 };
 
-ReactDOM.render(
-  <ToastProvider maxToasts={3}>
-    <App />
-  </ToastProvider>,
-  document.getElementById("root"),
+const App: React.FC = () => (
+  <ToastProvider maxToasts={5}>
+    <ExamplePage />
+  </ToastProvider>
 );
-
 export default App;
