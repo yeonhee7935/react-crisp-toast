@@ -17,11 +17,16 @@ const Toast: React.FC<ToastProps> = ({
   const [swipeOffset, setSwipeOffset] = useState(0);
   const toastRef = useRef<HTMLDivElement | null>(null);
   const startX = useRef(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => onClose(id), duration);
-    return () => clearTimeout(timer);
-  }, [id, duration, onClose]);
+    timerRef.current = setTimeout(() => onClose(id), duration);
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     startX.current = e.touches[0].clientX;

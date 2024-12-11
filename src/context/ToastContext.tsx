@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useReducer, useMemo } from "react";
 import ToastContainer from "../components/ToastContainer";
 
 type ToastType = "success" | "error" | "warning" | "info";
@@ -16,6 +16,17 @@ export interface Toast {
   position?: ToastPosition;
 }
 
+type ToastAction =
+  | { type: "ADD_TOAST"; toast: Omit<Toast, "id"> }
+  | { type: "REMOVE_TOAST"; id: string }
+  | { type: "SET_QUEUE"; queue: Toast[] };
+
+interface ToastState {
+  toasts: Toast[];
+  queue: Toast[];
+  maxToasts: number;
+}
+
 interface ToastContextType {
   addToast: (toast: Omit<Toast, "id">) => void;
   removeToast: (id: string) => void;
@@ -28,45 +39,63 @@ interface ToastProviderProps {
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
+// Reducer to handle adding/removing toasts and managing the queue
+const toastReducer = (state: ToastState, action: ToastAction): ToastState => {
+  switch (action.type) {
+    case "ADD_TOAST":
+      const newToast = { id: crypto.randomUUID(), ...action.toast };
+      if (state.toasts.length < state.maxToasts) {
+        return { ...state, toasts: [...state.toasts, newToast] };
+      } else {
+        return { ...state, queue: [...state.queue, newToast] };
+      }
+    case "REMOVE_TOAST":
+      const remainingToasts = state.toasts.filter(
+        (toast) => toast.id !== action.id,
+      );
+      if (remainingToasts.length < state.maxToasts && state.queue.length > 0) {
+        const nextToast = state.queue[0];
+        return {
+          ...state,
+          toasts: [...remainingToasts, nextToast],
+          queue: state.queue.slice(1),
+        };
+      }
+      return { ...state, toasts: remainingToasts };
+    case "SET_QUEUE":
+      return { ...state, queue: action.queue };
+    default:
+      return state;
+  }
+};
+
 export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
   maxToasts,
 }) => {
-  const [toasts, setToasts] = useState<Toast[]>([]);
-  const [queue, setQueue] = useState<Toast[]>([]);
+  const initialState: ToastState = { toasts: [], queue: [], maxToasts };
+  const [state, dispatch] = useReducer(toastReducer, initialState);
 
   const addToast = (toast: Omit<Toast, "id">) => {
-    const newToast = { id: crypto.randomUUID(), ...toast }; // Generate UUID
-    if (toasts.length < maxToasts) {
-      setToasts((prev) => [...prev, newToast]);
-    } else {
-      setQueue((prev) => [...prev, newToast]);
-    }
+    dispatch({ type: "ADD_TOAST", toast });
   };
 
   const removeToast = (id: string) => {
-    setToasts((prev) => {
-      const remainingToasts = prev.filter((toast) => toast.id !== id);
-      if (remainingToasts.length < maxToasts && queue.length > 0) {
-        const nextToast = queue[0];
-        setQueue((prevQueue) => prevQueue.slice(1));
-        setToasts((prevToasts) => [...remainingToasts, nextToast]);
-      }
-      return remainingToasts;
-    });
+    dispatch({ type: "REMOVE_TOAST", id });
   };
 
-  // Group toasts by position
-  const groupedToasts = toasts.reduce<Record<string, Toast[]>>((acc, toast) => {
-    const { vertical, horizontal } = toast.position || {
-      vertical: "top",
-      horizontal: "right",
-    };
-    const positionKey = `${vertical}-${horizontal}`;
-    acc[positionKey] = acc[positionKey] || [];
-    acc[positionKey].push(toast);
-    return acc;
-  }, {});
+  const groupedToasts = useMemo(() => {
+    return state.toasts.reduce<Record<string, Toast[]>>((acc, toast) => {
+      const { vertical, horizontal } = toast.position || {
+        vertical: "top",
+        horizontal: "right",
+      };
+      const positionKey = `${vertical}-${horizontal}`;
+      acc[positionKey] = acc[positionKey] || [];
+      acc[positionKey].push(toast);
+      return acc;
+    }, {});
+  }, [state.toasts]); // Recalculates only when `toasts` changes
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
