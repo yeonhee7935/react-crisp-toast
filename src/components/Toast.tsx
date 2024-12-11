@@ -12,15 +12,22 @@ const Toast: React.FC<ToastProps> = ({
   type,
   duration = 5000,
   onClose,
+  position = { vertical: "top", horizontal: "right" },
 }) => {
   const [isSwiping, setIsSwiping] = useState(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
+  const [isFading, setIsFading] = useState(false);
   const toastRef = useRef<HTMLDivElement | null>(null);
   const startX = useRef(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    timerRef.current = setTimeout(() => onClose(id), duration);
+    timerRef.current = setTimeout(() => {
+      setIsFading(true);
+      console.log("isFading", isFading);
+      setTimeout(() => onClose(id), 1000);
+    }, duration);
+
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
@@ -54,9 +61,13 @@ const Toast: React.FC<ToastProps> = ({
     setIsSwiping(false);
   };
 
+  const { vertical, horizontal } = position;
+
   return (
     <div
-      className={`toast toast-${type}`}
+      className={`toast toast-${type} ${horizontal} ${vertical} ${
+        isFading ? "fade-out" : ""
+      }`}
       ref={toastRef}
       style={{
         transform: `translateX(${swipeOffset}px)`,

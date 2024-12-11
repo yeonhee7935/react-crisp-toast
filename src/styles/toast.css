@@ -39,41 +39,169 @@
   transform: translateX(-50%);
 }
 
+/* Basic Toast Styles */
 .toast {
   position: relative;
-  background-color: #333;
-  color: #fff;
   padding: 10px 20px;
+  background-color: #333;
+  color: white;
   border-radius: 5px;
-  margin: 10px;
+  margin: 5px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: transform 0.3s ease-out;
+  opacity: 1;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Smooth transition for opacity and transform */
+  touch-action: none; /* Prevent touch move default behavior */
 }
 
+/* Different toast types */
 .toast-success {
-  background-color: #28a745;
+  background-color: green;
 }
 
 .toast-error {
-  background-color: #dc3545;
+  background-color: red;
 }
 
 .toast-warning {
-  background-color: #ffc107;
-  color: #000;
+  background-color: orange;
 }
 
 .toast-info {
-  background-color: #17a2b8;
+  background-color: blue;
 }
 
+/* Close button */
 .toast-close {
   background: none;
   border: none;
-  color: #fff;
-  font-size: 16px;
+  color: white;
+  font-size: 18px;
   cursor: pointer;
+}
+
+/* Slide-in from different directions */
+.toast.left {
+  animation: slide-in-left 0.3s forwards;
+}
+
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.toast.right {
+  animation: slide-in-right 0.3s forwards;
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.toast.top.center {
+  animation: slide-in-top 0.3s forwards;
+}
+
+@keyframes slide-in-top {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast.bottom.center {
+  animation: slide-in-bottom 0.3s forwards;
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-out and Slide-out animation */
+
+/* 각 방향별 Slide-out 애니메이션 */
+.toast.left.fade-out {
+  animation: slide-out-left 0.3s forwards;
+}
+
+@keyframes slide-out-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+}
+
+.toast.right.fade-out {
+  animation: slide-out-right 0.3s forwards;
+}
+
+@keyframes slide-out-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+
+.toast.top.center.fade-out {
+  animation: slide-out-top 0.3s forwards;
+}
+
+@keyframes slide-out-top {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}
+
+.toast.bottom.center.fade-out {
+  animation: slide-out-bottom 0.3s forwards;
+}
+
+@keyframes slide-out-bottom {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
 }
