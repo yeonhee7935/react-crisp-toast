@@ -12,6 +12,10 @@ It provides predefined styles for success, error, warning, and info messages whi
 Check out the live demo of react-crisp-toast in action: <br/>
 <a href="https://react-crisp-toast.vercel.app/">react-crisp-toast</a>
 
+<br/>
+<br/>
+<br/>
+
 ## **Features**
 
 - **Type-based styling**  
