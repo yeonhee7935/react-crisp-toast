@@ -46,7 +46,6 @@
   background-color: #333;
   color: white;
   border-radius: 5px;
-  margin: 5px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,10 +83,10 @@
 
 /* Slide-in from different directions */
 .toast.left {
-  animation: slide-in-left 0.3s forwards;
+  animation: slide-in-left 0.3s none;
 }
 
-@keyframes slide-in-left {
+@keyframes tslide-in-lef {
   0% {
     opacity: 0;
     transform: translateX(-100px);
@@ -99,7 +98,7 @@
 }
 
 .toast.right {
-  animation: slide-in-right 0.3s forwards;
+  animation: slide-in-right 0.3s none;
 }
 
 @keyframes slide-in-right {
@@ -114,7 +113,7 @@
 }
 
 .toast.top.center {
-  animation: slide-in-top 0.3s forwards;
+  animation: slide-in-top 0.3s none;
 }
 
 @keyframes slide-in-top {
@@ -129,7 +128,7 @@
 }
 
 .toast.bottom.center {
-  animation: slide-in-bottom 0.3s forwards;
+  animation: slide-in-bottom 0.3s none;
 }
 
 @keyframes slide-in-bottom {

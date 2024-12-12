@@ -24,8 +24,7 @@ const Toast: React.FC<ToastProps> = ({
   useEffect(() => {
     timerRef.current = setTimeout(() => {
       setIsFading(true);
-      console.log("isFading", isFading);
-      setTimeout(() => onClose(id), 1000);
+      setTimeout(() => onClose(id), 500);
     }, duration);
 
     return () => {
