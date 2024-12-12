@@ -14,7 +14,7 @@ const ExamplePage: React.FC = () => {
   const [horizontal, setHorizontal] = useState<"left" | "right" | "center">(
     "right",
   );
-  const [soundEnabled, setSoundEnabled] = useState(false); // New state for sound
+  const [soundEnabled, setSoundEnabled] = useState(true); // New state for sound
 
   const showToast = () => {
     addToast({
