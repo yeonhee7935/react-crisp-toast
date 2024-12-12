@@ -86,7 +86,7 @@
   animation: slide-in-left 0.3s none;
 }
 
-@keyframes tslide-in-lef {
+@keyframes slide-in-left {
   0% {
     opacity: 0;
     transform: translateX(-100px);

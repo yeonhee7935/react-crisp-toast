@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Toast as T } from "../context/ToastContext";
+import { Toast as T, useToast } from "../context/ToastContext";
 import "../styles/toast.css";
+import CloseIcon from "./CloseIcon";
+import { playSound } from "../utils/sound";
 
 interface ToastProps extends T {
   onClose: (id: string) => void;
@@ -13,7 +15,11 @@ const Toast: React.FC<ToastProps> = ({
   duration = 5000,
   onClose,
   position = { vertical: "top", horizontal: "right" },
+  showCloseButton = false,
+  soundEnabled = false,
 }) => {
+  const { soundEnabled: globalSoundEnabled } = useToast();
+
   const [isSwiping, setIsSwiping] = useState(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
   const [isFading, setIsFading] = useState(false);
@@ -22,6 +28,9 @@ const Toast: React.FC<ToastProps> = ({
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    if (soundEnabled !== undefined ? soundEnabled : globalSoundEnabled) {
+      playSound(type);
+    }
     timerRef.current = setTimeout(() => {
       setIsFading(true);
       setTimeout(() => onClose(id), 500);
@@ -77,9 +86,11 @@ const Toast: React.FC<ToastProps> = ({
       onTouchEnd={handleTouchEnd}
     >
       <span>{message}</span>
-      <button className="toast-close" onClick={() => onClose(id)}>
-        ✖
-      </button>
+      {showCloseButton && (
+        <button className="toast-close" onClick={() => onClose(id)}>
+          <CloseIcon size={20} color="#fff" />
+        </button>
+      )}
     </div>
   );
 };

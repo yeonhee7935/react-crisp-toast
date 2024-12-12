@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer, useMemo } from "react";
 import ToastContainer from "../components/ToastContainer";
 
-type ToastType = "success" | "error" | "warning" | "info";
+export type ToastType = "success" | "error" | "warning" | "info";
 
 interface ToastPosition {
   vertical: "top" | "bottom";
@@ -14,6 +14,8 @@ export interface Toast {
   type: ToastType;
   duration?: number;
   position?: ToastPosition;
+  showCloseButton?: boolean;
+  soundEnabled?: boolean;
 }
 
 type ToastAction =
@@ -30,11 +32,13 @@ interface ToastState {
 interface ToastContextType {
   addToast: (toast: Omit<Toast, "id">) => void;
   removeToast: (id: string) => void;
+  soundEnabled?: boolean;
 }
 
 interface ToastProviderProps {
   children: React.ReactNode;
   maxToasts: number;
+  soundEnabled?: boolean;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -72,6 +76,7 @@ const toastReducer = (state: ToastState, action: ToastAction): ToastState => {
 export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
   maxToasts,
+  soundEnabled = false,
 }) => {
   const initialState: ToastState = { toasts: [], queue: [], maxToasts };
   const [state, dispatch] = useReducer(toastReducer, initialState);
@@ -98,7 +103,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   }, [state.toasts]); // Recalculates only when `toasts` changes
 
   return (
-    <ToastContext.Provider value={{ addToast, removeToast }}>
+    <ToastContext.Provider value={{ addToast, removeToast, soundEnabled }}>
       {children}
       {Object.entries(groupedToasts).map(([positionKey, toasts]) => (
         <ToastContainer

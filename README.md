@@ -42,3 +42,17 @@ npm install react-crisp-toast
 ```bash
 yarn add react-crisp-toast
 ```
+
+<br/>
+<br/>
+<br/>
+
+## **Sound Effect**
+
+This project uses sound effects sourced from <a href="https://pixabay.com/collections/interface-sounds-23710620/">the Interface Sounds collection on Pixabay</a>. These sounds are part of Pixabay's public domain library and are free to use under the Pixabay Content License.
+
+- Attribution is not required, but credit is appreciated.
+- The sounds have been integrated into the library’s functionality (e.g., for toast notifications) and are not distributed as standalone files.
+  <br/>
+
+For more details on the license, visit the Pixabay Content License.

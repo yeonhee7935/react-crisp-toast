@@ -4,6 +4,7 @@ import { ToastProvider, useToast } from "./context/ToastContext";
 const ExamplePage: React.FC = () => {
   const { addToast } = useToast();
 
+  const [showCloseButton, setShowCloseButton] = useState(false);
   const [message, setMessage] = useState("Hello, this is a toast!");
   const [type, setType] = useState<"success" | "error" | "warning" | "info">(
     "info",
@@ -13,6 +14,7 @@ const ExamplePage: React.FC = () => {
   const [horizontal, setHorizontal] = useState<"left" | "right" | "center">(
     "right",
   );
+  const [soundEnabled, setSoundEnabled] = useState(false); // New state for sound
 
   const showToast = () => {
     addToast({
@@ -20,13 +22,15 @@ const ExamplePage: React.FC = () => {
       type,
       duration,
       position: { vertical, horizontal },
+      showCloseButton,
+      soundEnabled, // Passing the soundEnabled state
     });
   };
 
   return (
     <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
       <h1>Toast Example</h1>
-      <div style={{ marginBottom: "20px" }}>
+      <div style={{ marginBottom: "36px" }}>
         <label>
           <strong>Message:</strong>
         </label>
@@ -45,10 +49,40 @@ const ExamplePage: React.FC = () => {
         />
       </div>
 
-      <div style={{ marginBottom: "20px" }}>
+      <div style={{ marginBottom: "36px" }}>
+        <label>
+          <strong>Duration (ms):</strong>
+        </label>
+        <input
+          type="number"
+          value={duration}
+          onChange={(e) => setDuration(parseInt(e.target.value, 10))}
+          style={{
+            display: "block",
+            width: "100%",
+            padding: "10px",
+            marginTop: "10px",
+            fontSize: "16px",
+          }}
+        />
+      </div>
+      <div style={{ marginBottom: "36px" }}>
+        <label>
+          <strong>Show Close Button:</strong>
+        </label>
+        <input
+          type="checkbox"
+          checked={showCloseButton}
+          onChange={() => setShowCloseButton(!showCloseButton)}
+          style={{ marginTop: "10px", marginLeft: "10px" }}
+        />
+      </div>
+      <div style={{ marginBottom: "36px" }}>
         <label>
           <strong>Type:</strong>
         </label>
+        <br />
+        <br />
         <div>
           <label>
             <input
@@ -92,30 +126,17 @@ const ExamplePage: React.FC = () => {
           </label>
         </div>
       </div>
-
-      <div style={{ marginBottom: "20px" }}>
-        <label>
-          <strong>Duration (ms):</strong>
-        </label>
-        <input
-          type="number"
-          value={duration}
-          onChange={(e) => setDuration(parseInt(e.target.value, 10))}
-          style={{
-            display: "block",
-            width: "100%",
-            padding: "10px",
-            marginTop: "10px",
-            fontSize: "16px",
-          }}
-        />
-      </div>
-
-      <div style={{ marginBottom: "20px" }}>
+      <div style={{ marginBottom: "36px" }}>
         <label>
           <strong>Position:</strong>
         </label>
-        <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+        <div
+          style={{
+            marginTop: "10px",
+            marginBottom: "10px",
+            marginLeft: "16px",
+          }}
+        >
           <strong>Vertical:</strong>
           <label style={{ marginLeft: "20px" }}>
             <input
@@ -138,7 +159,7 @@ const ExamplePage: React.FC = () => {
             Bottom
           </label>
         </div>
-        <div>
+        <div style={{ marginLeft: "16px" }}>
           <strong>Horizontal:</strong>
           <label style={{ marginLeft: "20px" }}>
             <input
@@ -171,6 +192,18 @@ const ExamplePage: React.FC = () => {
             Center
           </label>
         </div>
+      </div>
+
+      <div style={{ marginBottom: "36px" }}>
+        <label>
+          <strong>Enable Sound:</strong>
+        </label>
+        <input
+          type="checkbox"
+          checked={soundEnabled}
+          onChange={() => setSoundEnabled(!soundEnabled)}
+          style={{ marginTop: "10px", marginLeft: "10px" }}
+        />
       </div>
 
       <button
