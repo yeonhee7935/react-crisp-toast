@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ToastProvider, useToast } from "./context/ToastContext";
+import { ToastProvider, useToast } from "../../core/src/context/ToastContext";
 
 const ExamplePage: React.FC = () => {
   const { addToast } = useToast();
