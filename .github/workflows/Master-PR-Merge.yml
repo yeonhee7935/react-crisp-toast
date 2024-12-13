@@ -1,0 +1,46 @@
+name: Master PR Merge [Publish to npm]
+
+on:
+  pull_request:
+    branches: ["master"]
+    types:
+      - closed
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == true
+    runs-on: [self-hosted, future-runner-01]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          clean: false
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check if react-crisp-toast has changed
+        id: check_changes
+        run: |
+          CHANGED_FILES=$(git diff --name-only origin/master...HEAD)
+          echo "Changed files: $CHANGED_FILES"
+          if echo "$CHANGED_FILES" | grep -q '^react-crisp-toast'; then
+            echo "react-crisp-toast has changed"
+            echo "publish=true" >> $GITHUB_ENV
+          else
+            echo "No changes detected in react-crisp-toast"
+            echo "publish=false" >> $GITHUB_ENV
+          fi
+
+      - name: Build react-crisp-toast
+        if: env.publish == 'true'
+        run: |
+          cd react-crisp-toast
+          pnpm build
+
+      - name: Publish to npm
+        if: env.publish == 'true'
+        run: |
+          cd react-crisp-toast
+          pnpm publish --access public
