@@ -53,6 +53,9 @@
   opacity: 1;
   transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Smooth transition for opacity and transform */
   touch-action: none; /* Prevent touch move default behavior */
+  word-break: break-all;
+  max-width: 90vw; /* Ensure the toast doesn't exceed the screen width */
+  box-sizing: border-box; /* Include padding in the width calculation */
 }
 
 /* Different toast types */
@@ -69,7 +72,7 @@
 }
 
 .toast-info {
-  background-color: blue;
+  background-color: #007bff;
 }
 
 /* Close button */

@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useReducer, useMemo } from "react";
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useMemo,
+  ReactNode,
+} from "react";
 import ToastContainer from "../components/ToastContainer";
 
 export type ToastType = "success" | "error" | "warning" | "info";
@@ -10,7 +16,7 @@ interface ToastPosition {
 
 export interface Toast {
   id: string; // Use UUID for unique IDs
-  message: string;
+  message: ReactNode;
   type: ToastType;
   duration?: number;
   position?: ToastPosition;
@@ -47,7 +53,7 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 const toastReducer = (state: ToastState, action: ToastAction): ToastState => {
   switch (action.type) {
     case "ADD_TOAST":
-      const newToast = { id: crypto.randomUUID(), ...action.toast };
+      const newToast = { id: Date.now().toString(), ...action.toast };
       if (state.toasts.length < state.maxToasts) {
         return { ...state, toasts: [...state.toasts, newToast] };
       } else {
