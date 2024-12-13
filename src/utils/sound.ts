@@ -1,10 +1,14 @@
 import { ToastType } from "../context/ToastContext";
+import success from "../assets/success.mp3";
+import error from "../assets/error.mp3";
+import warning from "../assets/warning.mp3";
+import info from "../assets/info.mp3";
 
 const audioMap: Record<ToastType, string> = {
-  success: "/sounds/success.mp3",
-  error: "/sounds/error.mp3",
-  warning: "/sounds/warning.mp3",
-  info: "/sounds/info.mp3",
+  success: success,
+  error: error,
+  warning: warning,
+  info: info,
 };
 
 /**
