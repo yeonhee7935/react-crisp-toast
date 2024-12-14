@@ -1,29 +1,15 @@
 {
-    "branches": ["main"],
-    "plugins": [
-      [
-        "semantic-release-gitmoji",
-        {
-          "releaseRules": {
-            "patch": [":bug:"],
-            "minor": [":sparkles:"],
-            "major": [":boom:"]
-          },
-          "releaseNotes": {
-            "template": "# 릴리즈 노트\n\n{{> commits}}",
-            "partials": {
-              "commit": "- {{emoji}} {{message}} ({{author}})"
-            }
-          }
-        }
-      ],
-      "@semantic-release/changelog",
-      [
-        "@semantic-release/git",
-        {
-          "assets": ["CHANGELOG.md", "package.json", "pnpm-lock.yaml"]
-        }
-      ]
-    ]
-  }
-  
+  "branches": ["master"],
+  "plugins": [
+    "semantic-release-gitmoji",
+    "@semantic-release/changelog",
+    "@semantic-release/git",
+    "@semantic-release/github",
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "core" 
+      } 
+    ]   
+  ]
+}
