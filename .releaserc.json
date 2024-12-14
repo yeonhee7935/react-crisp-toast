@@ -1,0 +1,15 @@
+{
+  "branches": ["master"],
+  "plugins": [
+    "semantic-release-gitmoji",
+    "@semantic-release/changelog",
+    "@semantic-release/git",
+    "@semantic-release/github",
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "core" 
+      } 
+    ]   
+  ]
+}
