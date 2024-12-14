@@ -1,0 +1,21 @@
+name: Master PR Request [Branch Name Validation & Test]
+
+on:
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          clean: false
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Tests
+        run: pnpm -r test

@@ -25,7 +25,7 @@ const Toast: React.FC<ToastProps> = ({
   const [isFading, setIsFading] = useState(false);
   const toastRef = useRef<HTMLDivElement | null>(null);
   const startX = useRef(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (soundEnabled !== undefined ? soundEnabled : globalSoundEnabled) {
