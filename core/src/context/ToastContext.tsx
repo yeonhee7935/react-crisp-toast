@@ -43,7 +43,7 @@ interface ToastContextType {
 
 interface ToastProviderProps {
   children: React.ReactNode;
-  maxToasts: number;
+  maxToasts?: number;
   soundEnabled?: boolean;
 }
 
@@ -79,7 +79,7 @@ const toastReducer = (state: ToastState, action: ToastAction): ToastState => {
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
-  maxToasts,
+  maxToasts = 5,
   soundEnabled = false,
 }) => {
   const initialState: ToastState = { toasts: [], queue: [], maxToasts };

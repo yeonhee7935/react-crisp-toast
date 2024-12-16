@@ -6,9 +6,9 @@
     "jsx": "react-jsx",
     "declaration": true,
     "esModuleInterop": true,
-    "lib": ["dom", "dom.iterable", "esnext"]
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["@types/jest", "@testing-library/jest-dom"]
   },
-  "types": ["jest", "@testing-library/jest-dom"],
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "__tests__/**/*"],
   "exclude": ["node_modules", "dist"]
 }
