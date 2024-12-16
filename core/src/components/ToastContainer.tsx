@@ -2,6 +2,7 @@ import React from "react";
 import Toast from "./Toast";
 import { Toast as ToastType } from "../context/ToastContext";
 import "../styles/toast.css";
+import "@testing-library/jest-dom";
 
 interface ToastContainerProps {
   toasts: ToastType[];

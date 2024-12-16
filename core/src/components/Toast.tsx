@@ -3,6 +3,7 @@ import { Toast as T, useToast } from "../context/ToastContext";
 import "../styles/toast.css";
 import CloseIcon from "./CloseIcon";
 import { playSound } from "../utils/sound";
+import { DEFAULT_DURATION, DEFAULT_POSITION } from "../constants";
 
 interface ToastProps extends T {
   onClose: (id: string) => void;
@@ -12,9 +13,9 @@ const Toast: React.FC<ToastProps> = ({
   id,
   message,
   type,
-  duration = 5000,
+  duration = DEFAULT_DURATION,
   onClose,
-  position = { vertical: "top", horizontal: "right" },
+  position = DEFAULT_POSITION,
   showCloseButton = false,
   soundEnabled = false,
 }) => {
@@ -73,6 +74,7 @@ const Toast: React.FC<ToastProps> = ({
 
   return (
     <div
+      role="alert"
       className={`toast toast-${type} ${horizontal} ${vertical} ${
         isFading ? "fade-out" : ""
       }`}

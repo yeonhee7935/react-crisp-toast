@@ -9,7 +9,7 @@ import ToastContainer from "../components/ToastContainer";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
-interface ToastPosition {
+export interface ToastPosition {
   vertical: "top" | "bottom";
   horizontal: "left" | "right" | "center";
 }
@@ -72,8 +72,6 @@ const toastReducer = (state: ToastState, action: ToastAction): ToastState => {
         };
       }
       return { ...state, toasts: remainingToasts };
-    case "SET_QUEUE":
-      return { ...state, queue: action.queue };
     default:
       return state;
   }
