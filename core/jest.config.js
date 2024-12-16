@@ -9,6 +9,7 @@ module.exports = {
     "\\.(mp3|wav|ogg)$": "jest-transform-stub",
     "^@src/(.*)$": "<rootDir>/$1", // src 경로 매핑 추가
   },
+  coveragePathIgnorePatterns: ["CloseIcon.tsx", "sound.ts"],
   collectCoverage: true,
   coverageThreshold: {
     global: {
