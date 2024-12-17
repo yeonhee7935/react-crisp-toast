@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Toast as T, useToast } from "../context/ToastContext";
-import "../styles/toast.css";
-import CloseIcon from "./CloseIcon";
-import { playSound } from "../utils/sound";
+import { Toast as T, useToast } from "@src/context/ToastContext";
+import "@src/styles/toast.css";
+import CloseIcon from "@src/components/CloseIcon";
+import { playSound } from "@src/utils/sound";
+import {
+  DEFAULT_DURATION,
+  DEFAULT_POSITION,
+  DEFAULT_FADE_OUT_DURATION,
+  DEFAULT_THRESHOLD,
+} from "../constants";
 
 interface ToastProps extends T {
   onClose: (id: string) => void;
@@ -12,11 +18,11 @@ const Toast: React.FC<ToastProps> = ({
   id,
   message,
   type,
-  duration = 5000,
+  duration = DEFAULT_DURATION,
   onClose,
-  position = { vertical: "top", horizontal: "right" },
+  position = DEFAULT_POSITION,
   showCloseButton = false,
-  soundEnabled = false,
+  soundEnabled,
 }) => {
   const { soundEnabled: globalSoundEnabled } = useToast();
 
@@ -33,7 +39,7 @@ const Toast: React.FC<ToastProps> = ({
     }
     timerRef.current = setTimeout(() => {
       setIsFading(true);
-      setTimeout(() => onClose(id), 500);
+      setTimeout(() => onClose(id), DEFAULT_FADE_OUT_DURATION);
     }, duration);
 
     return () => {
@@ -58,9 +64,9 @@ const Toast: React.FC<ToastProps> = ({
   };
 
   const handleTouchEnd = () => {
-    const threshold = 150;
+    const threshold = DEFAULT_THRESHOLD;
 
-    if (Math.abs(swipeOffset) > threshold) {
+    if (Math.abs(swipeOffset) >= threshold) {
       onClose(id);
     } else {
       setSwipeOffset(0);
@@ -73,6 +79,7 @@ const Toast: React.FC<ToastProps> = ({
 
   return (
     <div
+      role="alert"
       className={`toast toast-${type} ${horizontal} ${vertical} ${
         isFading ? "fade-out" : ""
       }`}

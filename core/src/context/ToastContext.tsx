@@ -5,11 +5,11 @@ import React, {
   useMemo,
   ReactNode,
 } from "react";
-import ToastContainer from "../components/ToastContainer";
+import ToastContainer from "@src/components/ToastContainer";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
-interface ToastPosition {
+export interface ToastPosition {
   vertical: "top" | "bottom";
   horizontal: "left" | "right" | "center";
 }
@@ -43,7 +43,7 @@ interface ToastContextType {
 
 interface ToastProviderProps {
   children: React.ReactNode;
-  maxToasts: number;
+  maxToasts?: number;
   soundEnabled?: boolean;
 }
 
@@ -72,8 +72,6 @@ const toastReducer = (state: ToastState, action: ToastAction): ToastState => {
         };
       }
       return { ...state, toasts: remainingToasts };
-    case "SET_QUEUE":
-      return { ...state, queue: action.queue };
     default:
       return state;
   }
@@ -81,7 +79,7 @@ const toastReducer = (state: ToastState, action: ToastAction): ToastState => {
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
-  maxToasts,
+  maxToasts = 5,
   soundEnabled = false,
 }) => {
   const initialState: ToastState = { toasts: [], queue: [], maxToasts };
