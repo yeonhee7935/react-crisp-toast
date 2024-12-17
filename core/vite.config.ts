@@ -37,4 +37,20 @@ export default defineConfig({
       "@src": path.resolve(__dirname, "src"), // @src 별칭을 src 폴더에 매핑
     },
   },
+  test: {
+    setupFiles:["./vitest.setup.ts"],
+    globals: true,
+    environment: 'jsdom',
+    include: ['__tests__/**/*.{ts,tsx}'],  
+    coverage: {
+      provider: 'istanbul',
+      reportsDirectory: './coverage',
+      include: ['src/**/*.{ts,tsx}'],  
+      exclude: ['src/components/CloseIcon.tsx', 'src/utils/sound.ts'], 
+      lines: 60,
+    },
+    alias: {
+      '@src': '/src',  
+    },
+  },
 });
