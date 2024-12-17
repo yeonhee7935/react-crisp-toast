@@ -26,10 +26,4 @@ jobs:
         run: pnpm install
 
       - name: Run Tests
-        run: pnpm -r test
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          files: ./react-crisp-toast/coverage/coverage-final.json
-          token: ${{ secrets.CODECOV_TOKEN }}
+        run: pnpm -r test 
