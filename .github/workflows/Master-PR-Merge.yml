@@ -26,14 +26,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build react-crisp-toast
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Build react-crisp-toast 
         run: |
           cd react-crisp-toast
           pnpm build
 
       - name: Publish to npm
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           pnpm release
