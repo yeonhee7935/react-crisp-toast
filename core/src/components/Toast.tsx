@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Toast as T, useToast } from "@src/context/ToastContext";
-import "@src/styles/toast.css";
 import CloseIcon from "@src/components/CloseIcon";
 import { playSound } from "@src/utils/sound";
+
 import {
   DEFAULT_DURATION,
   DEFAULT_POSITION,

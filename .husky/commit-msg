@@ -10,4 +10,4 @@ if ! echo "$COMMIT_MESSAGE" | grep -qE "^:.+: .+"; then
   exit 1
 fi
 
-echo "🔆 Thanks for keeping the convention 🔆"
+echo "🍞 Thanks for keeping the convention 🍞"

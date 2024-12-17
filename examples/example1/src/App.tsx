@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { ToastProvider, useToast } from "../../../core/src/context/ToastContext";
+import { useToast, ToastProvider } from "react-crisp-toast";
 
 const ExamplePage: React.FC = () => {
   const { addToast } = useToast();
 
   const [showCloseButton, setShowCloseButton] = useState(false);
-  const [message, setMessage] = useState("Hello, this is a toast!");
+  const [message, setMessage] = useState("🍞 Toast time!");
   const [type, setType] = useState<"success" | "error" | "warning" | "info">(
     "info",
   );
@@ -14,7 +14,7 @@ const ExamplePage: React.FC = () => {
   const [horizontal, setHorizontal] = useState<"left" | "right" | "center">(
     "right",
   );
-  const [soundEnabled, setSoundEnabled] = useState(true); // New state for sound
+  const [soundEnabled, setSoundEnabled] = useState(true);
 
   const showToast = () => {
     addToast({
@@ -23,16 +23,53 @@ const ExamplePage: React.FC = () => {
       duration,
       position: { vertical, horizontal },
       showCloseButton,
-      soundEnabled, // Passing the soundEnabled state
+      soundEnabled,
     });
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-      <h1>Toast Example</h1>
-      <div style={{ marginBottom: "36px" }}>
-        <label>
-          <strong>Message:</strong>
+    <div
+      style={{
+        padding: "20px",
+        maxWidth: "600px",
+        margin: "0 auto",
+        fontFamily: "'Poppins', sans-serif",
+        backgroundColor: "#121212", // Dark background
+        borderRadius: "12px",
+        color: "#fff", // Light text color
+        boxSizing: "border-box", // Ensures padding doesn't cause overflow
+      }}
+    >
+      <h1
+        style={{
+          fontSize: "2rem",
+          color: "#FFD700", // Gold color for the title
+          marginBottom: "20px", // Reduced margin
+          textAlign: "left",
+        }}
+      >
+        React Crisp Toast 🍞
+      </h1>
+      <p>This is a lightweight toast library for React.</p>
+      {/* Message Input Section */}
+      <div
+        style={{
+          marginBottom: "20px", // Reduced margin between boxes
+          backgroundColor: "#333", // Dark background for each section
+          padding: "20px",
+          borderRadius: "8px",
+        }}
+      >
+        <label
+          style={{
+            fontWeight: "bold",
+            fontSize: "1rem",
+            display: "block",
+            color: "#fff",
+            marginBottom: "10px",
+          }}
+        >
+          Message 📝
         </label>
         <input
           type="text"
@@ -41,17 +78,37 @@ const ExamplePage: React.FC = () => {
           style={{
             display: "block",
             width: "100%",
-            padding: "10px",
-            marginTop: "10px",
-            marginBottom: "20px",
+            padding: "12px",
             fontSize: "16px",
+            borderRadius: "8px",
+            border: "1px solid #FFD700",
+            backgroundColor: "#444", // Darker input background
+            color: "#FFD700", // Gold text
+            outline: "none",
+            boxSizing: "border-box", // Prevents overflow issues
           }}
         />
       </div>
 
-      <div style={{ marginBottom: "36px" }}>
-        <label>
-          <strong>Duration (ms):</strong>
+      {/* Duration Input Section */}
+      <div
+        style={{
+          marginBottom: "20px", // Reduced margin
+          backgroundColor: "#333",
+          padding: "20px",
+          borderRadius: "8px",
+        }}
+      >
+        <label
+          style={{
+            fontWeight: "bold",
+            fontSize: "1rem",
+            display: "block",
+            color: "#fff",
+            marginBottom: "10px",
+          }}
+        >
+          Duration (ms) ⏳
         </label>
         <input
           type="number"
@@ -60,31 +117,78 @@ const ExamplePage: React.FC = () => {
           style={{
             display: "block",
             width: "100%",
-            padding: "10px",
-            marginTop: "10px",
+            padding: "12px",
             fontSize: "16px",
+            borderRadius: "8px",
+            border: "1px solid #FFD700",
+            backgroundColor: "#444",
+            color: "#FFD700",
+            outline: "none",
+            boxSizing: "border-box",
           }}
         />
       </div>
-      <div style={{ marginBottom: "36px" }}>
-        <label>
-          <strong>Show Close Button:</strong>
+
+      {/* Show Close Button Section */}
+      <div
+        style={{
+          marginBottom: "20px", // Reduced margin
+          backgroundColor: "#333",
+          padding: "20px",
+          borderRadius: "8px",
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
+        }}
+      >
+        <label
+          style={{
+            fontWeight: "bold",
+            fontSize: "1rem",
+            color: "#fff",
+          }}
+        >
+          Show Close Button :
         </label>
-        <input
-          type="checkbox"
-          checked={showCloseButton}
-          onChange={() => setShowCloseButton(!showCloseButton)}
-          style={{ marginTop: "10px", marginLeft: "10px" }}
-        />
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={showCloseButton}
+            onChange={() => setShowCloseButton(!showCloseButton)}
+          />
+          <span className="slider"></span>
+        </label>
       </div>
-      <div style={{ marginBottom: "36px" }}>
-        <label>
-          <strong>Type:</strong>
+
+      {/* Type Section */}
+      <div
+        style={{
+          marginBottom: "20px", // Reduced margin
+          backgroundColor: "#333",
+          padding: "20px",
+          borderRadius: "8px",
+        }}
+      >
+        <label
+          style={{
+            fontWeight: "bold",
+            fontSize: "1rem",
+            display: "block",
+            color: "#fff",
+            marginBottom: "10px",
+          }}
+        >
+          Type
         </label>
-        <br />
-        <br />
-        <div>
-          <label>
+        <div style={{ marginTop: "10px" }}>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+              color: "#fff",
+            }}
+          >
             <input
               type="radio"
               name="type"
@@ -94,7 +198,14 @@ const ExamplePage: React.FC = () => {
             />
             Success
           </label>
-          <label style={{ marginLeft: "20px" }}>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+              color: "#fff",
+            }}
+          >
             <input
               type="radio"
               name="type"
@@ -104,7 +215,14 @@ const ExamplePage: React.FC = () => {
             />
             Error
           </label>
-          <label style={{ marginLeft: "20px" }}>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+              color: "#fff",
+            }}
+          >
             <input
               type="radio"
               name="type"
@@ -114,7 +232,14 @@ const ExamplePage: React.FC = () => {
             />
             Warning
           </label>
-          <label style={{ marginLeft: "20px" }}>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+              color: "#fff",
+            }}
+          >
             <input
               type="radio"
               name="type"
@@ -126,19 +251,45 @@ const ExamplePage: React.FC = () => {
           </label>
         </div>
       </div>
-      <div style={{ marginBottom: "36px" }}>
-        <label>
-          <strong>Position:</strong>
-        </label>
-        <div
+
+      {/* Position Section */}
+      <div
+        style={{
+          marginBottom: "20px", // Reduced margin
+          backgroundColor: "#333",
+          padding: "20px",
+          borderRadius: "8px",
+        }}
+      >
+        <label
           style={{
-            marginTop: "10px",
+            fontWeight: "bold",
+            fontSize: "1rem",
+            display: "block",
+            color: "#fff",
             marginBottom: "10px",
-            marginLeft: "16px",
           }}
         >
-          <strong>Vertical:</strong>
-          <label style={{ marginLeft: "20px" }}>
+          Position
+        </label>
+        <div style={{ marginTop: "10px" }}>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+              color: "#fff",
+            }}
+          >
+            - Vertical
+          </label>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+            }}
+          >
             <input
               type="radio"
               name="vertical"
@@ -148,7 +299,13 @@ const ExamplePage: React.FC = () => {
             />
             Top
           </label>
-          <label style={{ marginLeft: "20px" }}>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+            }}
+          >
             <input
               type="radio"
               name="vertical"
@@ -159,9 +316,24 @@ const ExamplePage: React.FC = () => {
             Bottom
           </label>
         </div>
-        <div style={{ marginLeft: "16px" }}>
-          <strong>Horizontal:</strong>
-          <label style={{ marginLeft: "20px" }}>
+        <div style={{ marginTop: "10px" }}>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+              color: "#fff",
+            }}
+          >
+            - Horizontal
+          </label>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+            }}
+          >
             <input
               type="radio"
               name="horizontal"
@@ -171,7 +343,13 @@ const ExamplePage: React.FC = () => {
             />
             Left
           </label>
-          <label style={{ marginLeft: "20px" }}>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+            }}
+          >
             <input
               type="radio"
               name="horizontal"
@@ -181,7 +359,13 @@ const ExamplePage: React.FC = () => {
             />
             Right
           </label>
-          <label style={{ marginLeft: "20px" }}>
+          <label
+            style={{
+              marginBottom: "10px",
+              display: "inline-block",
+              marginRight: "20px",
+            }}
+          >
             <input
               type="radio"
               name="horizontal"
@@ -194,28 +378,50 @@ const ExamplePage: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ marginBottom: "36px" }}>
-        <label>
-          <strong>Enable Sound:</strong>
+      {/* Enable Sound Section */}
+      <div
+        style={{
+          marginBottom: "20px", // Reduced margin
+          backgroundColor: "#333",
+          padding: "20px",
+          borderRadius: "8px",
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
+        }}
+      >
+        <label
+          style={{
+            fontWeight: "bold",
+            fontSize: "1rem",
+            color: "#fff",
+          }}
+        >
+          Enable Sound 🔊:
         </label>
-        <input
-          type="checkbox"
-          checked={soundEnabled}
-          onChange={() => setSoundEnabled(!soundEnabled)}
-          style={{ marginTop: "10px", marginLeft: "10px" }}
-        />
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={soundEnabled}
+            onChange={() => setSoundEnabled(!soundEnabled)}
+          />
+          <span className="slider"></span>
+        </label>
       </div>
 
+      {/* Show Toast Button */}
       <button
         onClick={showToast}
         style={{
-          padding: "10px 20px",
-          fontSize: "16px",
-          backgroundColor: "#007bff",
-          color: "#fff",
+          padding: "15px 30px",
+          fontSize: "18px",
+          backgroundColor: "#FFD700",
+          color: "#121212",
           border: "none",
-          borderRadius: "5px",
+          borderRadius: "8px",
           cursor: "pointer",
+          fontWeight: "bold",
+          transition: "background-color 0.3s",
         }}
       >
         Show Toast
@@ -225,8 +431,11 @@ const ExamplePage: React.FC = () => {
 };
 
 const App: React.FC = () => (
-  <ToastProvider maxToasts={5}>
-    <ExamplePage />
-  </ToastProvider>
+  <div style={{ backgroundColor: "#121212", minHeight: "100vh" }}>
+    <ToastProvider maxToasts={5}>
+      <ExamplePage />
+    </ToastProvider>
+  </div>
 );
+
 export default App;
