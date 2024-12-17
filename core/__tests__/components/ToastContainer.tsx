@@ -1,10 +1,10 @@
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";  
 import { render, screen, fireEvent } from "@testing-library/react";
 import ToastContainer from "@src/components/ToastContainer";
 import { Toast as ToastType, ToastProvider } from "@src/context/ToastContext";
 
 describe("ToastContainer", () => {
-  const mockRemoveToast = jest.fn();
+  const mockRemoveToast = vi.fn();  
 
   const toasts: ToastType[] = [
     {

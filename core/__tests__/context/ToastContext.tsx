@@ -1,9 +1,9 @@
-import React from "react";
-import "@testing-library/jest-dom";
-import { render, screen, fireEvent } from "@testing-library/react";
+import React from "react"; 
+import { describe, it, expect, vi } from "vitest";
+ import { render, screen, fireEvent } from "@testing-library/react";
 import { ToastProvider, useToast, Toast } from "@src/context/ToastContext";
 
-jest.mock("@src/components/ToastContainer", () => ({
+vi.mock("@src/components/ToastContainer", () => ({
   __esModule: true,
   default: ({
     position,
@@ -125,7 +125,7 @@ describe("ToastProvider", () => {
   });
 
   it("throws an error when useToast is used outside ToastProvider", () => {
-    const ConsoleSpy = jest
+    const ConsoleSpy = vi
       .spyOn(console, "error")
       .mockImplementation(() => {}); // Suppress React error output
 
