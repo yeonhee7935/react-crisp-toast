@@ -27,30 +27,15 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-
-      - name: Check if react-crisp-toast has changed
-        id: check_changes
-        run: |
-          CHANGED_FILES=$(git diff --name-only origin/master...HEAD)
-          echo "Changed files: $CHANGED_FILES"
-          if echo "$CHANGED_FILES" | grep -q '^react-crisp-toast'; then
-            echo "react-crisp-toast has changed"
-            echo "publish=true" >> $GITHUB_ENV
-          else
-            echo "No changes react-crisp-toast"
-            echo "publish=false" >> $GITHUB_ENV
-          fi
-
+ 
       - name: Build react-crisp-toast
         env:
           GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-        if: env.publish == 'true'
         run: |
           cd react-crisp-toast
           pnpm build
 
       - name: Publish to npm
-        if: env.publish == 'true'
         run: |
           pnpm release
