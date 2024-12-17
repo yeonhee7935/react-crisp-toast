@@ -33,11 +33,11 @@ jobs:
         run: |
           CHANGED_FILES=$(git diff --name-only origin/master...HEAD)
           echo "Changed files: $CHANGED_FILES"
-          if echo "$CHANGED_FILES" | grep -q '^core'; then
-            echo "core has changed"
+          if echo "$CHANGED_FILES" | grep -q '^react-crisp-toast'; then
+            echo "react-crisp-toast has changed"
             echo "publish=true" >> $GITHUB_ENV
           else
-            echo "No changes core"
+            echo "No changes react-crisp-toast"
             echo "publish=false" >> $GITHUB_ENV
           fi
 
@@ -47,7 +47,7 @@ jobs:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
         if: env.publish == 'true'
         run: |
-          cd core
+          cd react-crisp-toast
           pnpm build
 
       - name: Publish to npm
