@@ -1,5 +1,5 @@
 {
-  "branches": ["develop"],
+  "branches": ["master"],
   "plugins": [
     "semantic-release-gitmoji",
     "@semantic-release/changelog",
