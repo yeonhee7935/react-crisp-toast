@@ -1,9 +1,9 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { ToastProvider, useToast, Toast } from "../../src/context/ToastContext";
+import { ToastProvider, useToast, Toast } from "@src/context/ToastContext";
 
-jest.mock("../../src/components/ToastContainer", () => ({
+jest.mock("@src/components/ToastContainer", () => ({
   __esModule: true,
   default: ({
     position,

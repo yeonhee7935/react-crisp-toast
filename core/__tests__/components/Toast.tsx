@@ -7,23 +7,23 @@ import {
   waitFor,
   act,
 } from "@testing-library/react";
-import Toast from "../../src/components/Toast";
-import { Toast as ToastType, useToast } from "../../src/context/ToastContext";
+import Toast from "@src/components/Toast";
+import { Toast as ToastType, useToast } from "@src/context/ToastContext";
 import {
   DEFAULT_DURATION,
   DEFAULT_POSITION,
   DEFAULT_FADE_OUT_DURATION,
   DEFAULT_THRESHOLD,
-} from "../../src/constants";
-import { playSound } from "../../src/utils/sound";
+} from "@src/constants";
+import { playSound } from "@src/utils/sound";
 
 // Mock playSound function to prevent actual sound play during tests
-jest.mock("../../src/utils/sound", () => ({
+jest.mock("@src/utils/sound", () => ({
   playSound: jest.fn(),
 }));
 
 // Mock the useToast hook to isolate the Toast component from the context
-jest.mock("../../src/context/ToastContext", () => ({
+jest.mock("@src/context/ToastContext", () => ({
   useToast: jest.fn(),
 }));
 

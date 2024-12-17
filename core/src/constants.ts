@@ -1,4 +1,4 @@
-import { ToastPosition } from "./context/ToastContext";
+import { ToastPosition } from "@src/context/ToastContext";
 
 export const DEFAULT_DURATION = 5000;
 export const DEFAULT_POSITION: ToastPosition = {

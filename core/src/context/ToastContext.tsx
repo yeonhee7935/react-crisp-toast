@@ -5,7 +5,7 @@ import React, {
   useMemo,
   ReactNode,
 } from "react";
-import ToastContainer from "../components/ToastContainer";
+import ToastContainer from "@src/components/ToastContainer";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
