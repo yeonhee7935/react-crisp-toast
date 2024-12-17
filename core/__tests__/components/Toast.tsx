@@ -51,17 +51,15 @@ describe("Toast component", () => {
         });
       });
       it("renders the toast with correct message and type", () => {
-        act(() => render(<Toast {...toastProps} onClose={mockOnClose} />));
+        render(<Toast {...toastProps} onClose={mockOnClose} />);
 
         expect(screen.getByText("Test Toast")).toBeInTheDocument();
         expect(screen.getByRole("alert")).toHaveClass("toast-success");
       });
 
       it("plays sound when soundEnabled is true", () => {
-        act(() =>
-          render(
-            <Toast {...toastProps} onClose={mockOnClose} soundEnabled={true} />,
-          ),
+        render(
+          <Toast {...toastProps} onClose={mockOnClose} soundEnabled={true} />,
         );
 
         // Ensure playSound is called for the correct toast type
@@ -69,21 +67,15 @@ describe("Toast component", () => {
       });
 
       it("does not play sound if soundEnabled is not provided", () => {
-        act(() => render(<Toast {...toastProps} onClose={mockOnClose} />));
+        render(<Toast {...toastProps} onClose={mockOnClose} />);
 
         // Ensure playSound is not called
         expect(playSound).not.toHaveBeenCalled();
       });
 
       it("does not play sound if soundEnabled is false", () => {
-        act(() =>
-          render(
-            <Toast
-              {...toastProps}
-              onClose={mockOnClose}
-              soundEnabled={false}
-            />,
-          ),
+        render(
+          <Toast {...toastProps} onClose={mockOnClose} soundEnabled={false} />,
         );
 
         // Ensure playSound is not called
@@ -99,17 +91,15 @@ describe("Toast component", () => {
       });
 
       it("renders the toast with correct message and type", () => {
-        act(() => render(<Toast {...toastProps} onClose={mockOnClose} />));
+        render(<Toast {...toastProps} onClose={mockOnClose} />);
 
         expect(screen.getByText("Test Toast")).toBeInTheDocument();
         expect(screen.getByRole("alert")).toHaveClass("toast-success");
       });
 
       it("plays sound when soundEnabled is true", () => {
-        act(() =>
-          render(
-            <Toast {...toastProps} onClose={mockOnClose} soundEnabled={true} />,
-          ),
+        render(
+          <Toast {...toastProps} onClose={mockOnClose} soundEnabled={true} />,
         );
 
         // Ensure playSound is called for the correct toast type
@@ -117,21 +107,15 @@ describe("Toast component", () => {
       });
 
       it("plays sound if soundEnabled is not provided (using global setting)", () => {
-        act(() => render(<Toast {...toastProps} onClose={mockOnClose} />));
+        render(<Toast {...toastProps} onClose={mockOnClose} />);
 
         // Ensure playSound is called for the correct toast type
         expect(playSound).not.toHaveBeenCalled();
       });
 
       it("does not play sound if soundEnabled is false", () => {
-        act(() =>
-          render(
-            <Toast
-              {...toastProps}
-              onClose={mockOnClose}
-              soundEnabled={false}
-            />,
-          ),
+        render(
+          <Toast {...toastProps} onClose={mockOnClose} soundEnabled={false} />,
         );
 
         // Ensure playSound is not called
@@ -142,7 +126,7 @@ describe("Toast component", () => {
 
   describe("close button", () => {
     it("closes toast when close button is clicked", () => {
-      act(() => render(<Toast {...toastProps} onClose={mockOnClose} />));
+      render(<Toast {...toastProps} onClose={mockOnClose} />);
 
       const closeButton = screen.getByRole("button");
       fireEvent.click(closeButton);
@@ -153,9 +137,7 @@ describe("Toast component", () => {
     it("does not display close button if showCloseButton is false", () => {
       const toastWithoutCloseButton = { ...toastProps, showCloseButton: false };
 
-      act(() =>
-        render(<Toast {...toastWithoutCloseButton} onClose={mockOnClose} />),
-      );
+      render(<Toast {...toastWithoutCloseButton} onClose={mockOnClose} />);
 
       const closeButton = screen.queryByRole("button");
       expect(closeButton).toBeNull(); // Ensure no close button is rendered
@@ -164,7 +146,7 @@ describe("Toast component", () => {
 
   describe("swipe guesture", () => {
     it("closes the toast when swipe exceeds the threshold", async () => {
-      act(() => render(<Toast {...toastProps} onClose={mockOnClose} />));
+      render(<Toast {...toastProps} onClose={mockOnClose} />);
       const SWIPE_THRESHOLD = DEFAULT_THRESHOLD + 100;
       // Start a swipe gesture
       fireEvent.touchStart(screen.getByRole("alert"), {
@@ -186,7 +168,7 @@ describe("Toast component", () => {
     });
 
     it("does not close the toast when swipe does not exceed the threshold", async () => {
-      act(() => render(<Toast {...toastProps} onClose={mockOnClose} />));
+      render(<Toast {...toastProps} onClose={mockOnClose} />);
       const SWIPE_THRESHOLD = DEFAULT_THRESHOLD - 100;
       // Start a swipe gesture
       fireEvent.touchStart(screen.getByRole("alert"), {
@@ -210,7 +192,7 @@ describe("Toast component", () => {
   describe("fade out", () => {
     it("handles fade-out effect after duration", async () => {
       jest.useFakeTimers(); // Mock timers for duration
-      act(() => render(<Toast {...toastProps} onClose={mockOnClose} />));
+      render(<Toast {...toastProps} onClose={mockOnClose} />);
 
       // Fast forward time by duration
       act(() =>
