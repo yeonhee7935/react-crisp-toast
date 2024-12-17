@@ -1,0 +1,29 @@
+name: Master PR Request [Branch Name Validation & Test]
+
+on:
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          clean: false
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x' 
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+        
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Tests
+        run: pnpm -r test

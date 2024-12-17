@@ -1,0 +1,15 @@
+{
+  "branches": ["develop"],
+  "plugins": [
+    "semantic-release-gitmoji",
+    "@semantic-release/changelog",
+    "@semantic-release/git",
+    "@semantic-release/github",
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "react-crisp-toast" 
+      } 
+    ]   
+  ]
+}

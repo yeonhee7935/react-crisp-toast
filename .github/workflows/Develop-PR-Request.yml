@@ -1,0 +1,35 @@
+name: Develop PR Request [Test]
+
+on:
+  pull_request:
+    branches:
+      - "develop"
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          clean: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Tests
+        run: pnpm -r test
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./react-crisp-toast/coverage/coverage-final.json
+          token: ${{ secrets.CODECOV_TOKEN }}

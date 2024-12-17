@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "CommonJS",
+    "target": "ES6",
+    "jsx": "react-jsx",
+    "declaration": true,
+    "esModuleInterop": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": [  "@testing-library/jest-dom" ],
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*", "__tests__/**/*", "index.ts"],
+  "exclude": ["node_modules", "dist", "__test__"]
+}
