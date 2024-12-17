@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
     if: github.event.pull_request.merged == true
-    runs-on: [self-hosted, future-runner-01]
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
