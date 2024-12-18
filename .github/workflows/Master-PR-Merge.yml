@@ -10,6 +10,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      packages: write
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -26,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build react-crisp-toast 
+      - name: Build react-crisp-toast
         run: |
           cd react-crisp-toast
           pnpm build
