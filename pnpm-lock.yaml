@@ -38,6 +38,9 @@ importers:
       react:
         specifier: ^18.3.1
         version: 18.3.1
+      react-crisp-toast:
+        specifier: ^1.0.1
+        version: 1.0.1(vite@6.0.3(@types/node@22.10.2))
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
@@ -2426,6 +2429,9 @@ packages:
   rc@1.2.8:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
+
+  react-crisp-toast@1.0.1:
+    resolution: {integrity: sha512-MexgjHYFhyGv8dx0GwY/A8rLlMpJ+wcLWfsNtAa3WyjyKlBXjJv8Da31c66a8sqN9mHpI4Tq6eBJ771Xqkn0Bw==}
 
   react-dom@18.3.1:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
@@ -5364,6 +5370,14 @@ snapshots:
       ini: 1.3.8
       minimist: 1.2.8
       strip-json-comments: 2.0.1
+
+  react-crisp-toast@1.0.1(vite@6.0.3(@types/node@22.10.2)):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      vite-plugin-css-injected-by-js: 3.5.2(vite@6.0.3(@types/node@22.10.2))
+    transitivePeerDependencies:
+      - vite
 
   react-dom@18.3.1(react@18.3.1):
     dependencies:
