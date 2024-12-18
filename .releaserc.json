@@ -1,15 +1,22 @@
 {
   "branches": ["master"],
   "plugins": [
-    "semantic-release-gitmoji",
+    [
+      "semantic-release-gitmoji",
+      {
+        "releaseRules": {
+          "patch": [":memo:"]
+        }
+      }
+    ],
     "@semantic-release/changelog",
     "@semantic-release/git",
     "@semantic-release/github",
     [
       "@semantic-release/npm",
       {
-        "pkgRoot": "react-crisp-toast" 
-      } 
-    ]   
+        "pkgRoot": "react-crisp-toast"
+      }
+    ]
   ]
 }

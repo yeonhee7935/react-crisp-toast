@@ -1,5 +1,19 @@
 {
   "name": "react-crisp-toast",
+  "description": "A lightweight toast notification library for React.",
+  "keywords": [
+    "react",
+    "toast",
+    "notifications",
+    "snackbar",
+    "react-toast",
+    "toast-library",
+    "toast-notifications",
+    "react-notifications",
+    "ui-components",
+    "javascript",
+    "typescript"
+  ],
   "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

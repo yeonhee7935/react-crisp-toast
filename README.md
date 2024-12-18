@@ -1,6 +1,6 @@
 # **react-crisp-toast 🍞**
-![readme](https://github.com/user-attachments/assets/d5ae8868-b8af-4898-96ca-8ae269ffd33c)
 
+![readme](https://github.com/user-attachments/assets/d5ae8868-b8af-4898-96ca-8ae269ffd33c)
 
 Lightweight toast notification library for React.
 
@@ -99,9 +99,9 @@ const ExampleComponent = () => {
 <br/>
 <br/>
 
-## **Options**
+## **API Reference**
 
-### ToastProvider
+### `ToastProvider` Props
 
 | **Prop**       | **Type** | **Description**                                             | **Required** | **Default** |
 | -------------- | -------- | ----------------------------------------------------------- | ------------ | ----------- |
@@ -109,10 +109,9 @@ const ExampleComponent = () => {
 | `soundEnabled` | boolean  | Whether to enable sound for toast notifications.            | No           | false       |
 
  <br/>
+ <br/>
 
-### addToast
-
-These are the parameters passed to the `addToast` function to create a toast notification.
+### `addToast` Parameters
 
 | **Name**              | **Type**                                    | **Description**                                                                                         | **Required** | **Default**                              |
 | --------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------ | ---------------------------------------- |
