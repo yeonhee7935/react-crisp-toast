@@ -7,7 +7,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": [  "@testing-library/jest-dom" ],
+    "types": ["@testing-library/jest-dom", "vitest/globals"],
     "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"]

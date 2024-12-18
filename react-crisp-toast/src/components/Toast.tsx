@@ -8,6 +8,7 @@ import {
   DEFAULT_POSITION,
   DEFAULT_FADE_OUT_DURATION,
   DEFAULT_THRESHOLD,
+  DEFAULT_TYPE,
 } from "../constants";
 
 interface ToastProps extends T {
@@ -17,7 +18,7 @@ interface ToastProps extends T {
 const Toast: React.FC<ToastProps> = ({
   id,
   message,
-  type,
+  type = DEFAULT_TYPE,
   duration = DEFAULT_DURATION,
   onClose,
   position = DEFAULT_POSITION,
