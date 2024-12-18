@@ -1,3 +1,8 @@
+# [v1.1.0](https://github.com/yeonhee7935/react-crisp-toast/compare/v1.0.2...v1.1.0) (2024-12-18)
+
+## ✨ New Features
+- [`cf627a7`](https://github.com/yeonhee7935/react-crisp-toast/commit/cf627a7)  Set default value for &#x27;type&#x27; parameter
+
 # [v1.0.2](https://github.com/yeonhee7935/react-crisp-toast/compare/v1.0.1...v1.0.2) (2024-12-18)
 
 # [v1.0.1](https://github.com/yeonhee7935/react-crisp-toast/compare/v1.0.0...v1.0.1) (2024-12-18)
