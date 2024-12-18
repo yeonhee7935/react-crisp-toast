@@ -1,3 +1,8 @@
+# [v1.0.1](https://github.com/yeonhee7935/react-crisp-toast/compare/v1.0.0...v1.0.1) (2024-12-18)
+
+## 🐛 Bug Fixes
+- [`b4be38b`](https://github.com/yeonhee7935/react-crisp-toast/commit/b4be38b)  Update CI configuration for auto-publishing to npm
+
 # v1.0.0 (2024-12-18)
 
 ## ✨ New Features
