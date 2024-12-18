@@ -10,6 +10,7 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       include: ["src/**/*.ts", "src/**/*.tsx", "index.ts"],
+      rollupTypes: true,
     }),
     cssInjectedByJsPlugin(),
   ],
@@ -38,19 +39,19 @@ export default defineConfig({
     },
   },
   test: {
-    setupFiles:["./vitest.setup.ts"],
+    setupFiles: ["./vitest.setup.ts"],
     globals: true,
-    environment: 'jsdom',
-    include: ['__tests__/**/*.{ts,tsx}'],  
+    environment: "jsdom",
+    include: ["__tests__/**/*.{ts,tsx}"],
     coverage: {
-      provider: 'istanbul',
-      reportsDirectory: './coverage',
-      include: ['src/**/*.{ts,tsx}'],  
-      exclude: ['src/components/CloseIcon.tsx', 'src/utils/sound.ts'], 
+      provider: "istanbul",
+      reportsDirectory: "./coverage",
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: ["src/components/CloseIcon.tsx", "src/utils/sound.ts"],
       lines: 60,
     },
     alias: {
-      '@src': '/src',  
+      "@src": "/src",
     },
   },
 });

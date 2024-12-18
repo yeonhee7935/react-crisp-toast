@@ -1,7 +1,5 @@
 # Exclude source files
-src/
-*.ts
-*.tsx
+ 
 
 # Exclude test files and test configurations
 __tests__/
