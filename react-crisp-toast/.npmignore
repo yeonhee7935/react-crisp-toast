@@ -5,6 +5,7 @@ src/
 
 # Exclude test files and test configurations
 __tests__/
+coverage/
 test/
 tests/
 *.test.ts
