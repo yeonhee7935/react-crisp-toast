@@ -4,8 +4,17 @@
 COMMIT_MESSAGE_FILE=$1
 COMMIT_MESSAGE=$(cat "$COMMIT_MESSAGE_FILE")
 
-if ! echo "$COMMIT_MESSAGE" | grep -qE "^:.+: .+"; then
-  echo "Please use gitmoji in your commit message"
+if echo "$COMMIT_MESSAGE" | grep -qE "^Merge pull request"; then
+  PR_NUMBER=$(echo "$COMMIT_MESSAGE" | grep -oE "#[0-9]+")
+  PR_TITLE=$(echo "$COMMIT_MESSAGE" | sed -nE 's/^Merge pull request #[0-9]+ from [^:]+:?[[:space:]]*(.*)/\1/p')
+  NEW_MESSAGE=":twisted_rightward_arrows: Merge $PR_NUMBER: $PR_TITLE"
+  echo "$NEW_MESSAGE" > "$COMMIT_MESSAGE_FILE"
+  echo "✅ PR Merge Commit message updated to: $NEW_MESSAGE"
+  exit 0
+fi
+
+if ! echo "$COMMIT_MESSAGE" | grep -qE "^:[a-zA-Z]+: .+"; then
+  echo "❌ Please use gitmoji in your commit message"
   echo "Commit message should follow the pattern: ^:[a-zA-Z]+: .+"
   exit 1
 fi
