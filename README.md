@@ -1,7 +1,8 @@
 # **react-crisp-toast 🍞**
-![demo](https://github.com/user-attachments/assets/57dd839f-9d15-4631-82c0-403be0f88f8e)
+![readme](https://github.com/user-attachments/assets/d5ae8868-b8af-4898-96ca-8ae269ffd33c)
 
-`react-crisp-toast` is a lightweight **toast notification library** for React.
+
+Lightweight toast notification library for React.
 
 <br/>
 <br/>
