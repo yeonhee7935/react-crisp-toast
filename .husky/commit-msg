@@ -1,18 +1,58 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 COMMIT_MESSAGE_FILE=$1
 COMMIT_MESSAGE=$(cat "$COMMIT_MESSAGE_FILE")
 
+# PR Merge Commit 메시지 감지 및 수정
 if echo "$COMMIT_MESSAGE" | grep -qE "^Merge pull request"; then
   PR_NUMBER=$(echo "$COMMIT_MESSAGE" | grep -oE "#[0-9]+")
   PR_TITLE=$(echo "$COMMIT_MESSAGE" | sed -nE 's/^Merge pull request #[0-9]+ from [^:]+:?[[:space:]]*(.*)/\1/p')
   NEW_MESSAGE=":twisted_rightward_arrows: Merge $PR_NUMBER: $PR_TITLE"
   echo "$NEW_MESSAGE" > "$COMMIT_MESSAGE_FILE"
-  echo "✅ PR Merge Commit message updated to: $NEW_MESSAGE"
   exit 0
 fi
 
+# semantic-release의 커밋 메시지 자동 처리
+if echo "$COMMIT_MESSAGE" | grep -qE "^chore\(release\): .+"; then
+  NEW_MESSAGE=":tada: $COMMIT_MESSAGE"
+  echo "$NEW_MESSAGE" > "$COMMIT_MESSAGE_FILE"
+  exit 0
+fi
+
+# gitmoji 자동 처리: chore, fix, feat, docs 등
+if echo "$COMMIT_MESSAGE" | grep -qE "^\w+"; then
+  COMMIT_TYPE=$(echo "$COMMIT_MESSAGE" | grep -oE "^\w+" | head -n 1)
+
+  case "$COMMIT_TYPE" in
+    chore)
+      NEW_MESSAGE=":wrench: $COMMIT_MESSAGE"
+      ;;
+    fix)
+      NEW_MESSAGE=":bug: $COMMIT_MESSAGE"
+      ;;
+    feat)
+      NEW_MESSAGE=":sparkles: $COMMIT_MESSAGE"
+      ;;
+    docs)
+      NEW_MESSAGE=":memo: $COMMIT_MESSAGE"
+      ;;
+    style)
+      NEW_MESSAGE=":art: $COMMIT_MESSAGE"
+      ;;
+    refactor)
+      NEW_MESSAGE=":recycle: $COMMIT_MESSAGE"
+      ;;
+    test)
+      NEW_MESSAGE=":test_tube: $COMMIT_MESSAGE"
+      ;;
+    *)
+      NEW_MESSAGE="$COMMIT_MESSAGE"
+      ;;
+  esac
+
+  echo "$NEW_MESSAGE" > "$COMMIT_MESSAGE_FILE"
+  exit 0
+fi
+
+# 커밋 메시지 규칙 검증
 if ! echo "$COMMIT_MESSAGE" | grep -qE "^:[a-zA-Z]+: .+"; then
   echo "❌ Please use gitmoji in your commit message"
   echo "Commit message should follow the pattern: ^:[a-zA-Z]+: .+"
