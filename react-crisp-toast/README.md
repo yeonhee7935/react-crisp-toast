@@ -1,6 +1,6 @@
 # **react-crisp-toast 🍞**
 
-`react-crisp-toast` is a lightweight **toast notification library** for React.  
+`react-crisp-toast` is a lightweight **toast notification library** for React.
 
 <br/>
 <br/>
@@ -60,20 +60,25 @@ yarn add react-crisp-toast
 To use `react-crisp-toast` in your project, follow these steps.
 
 ### 1. Wrap your application with the `ToastProvider`
-`ToastProvider` component manages the state of all toasts and must wrap your application (or a part of it) to provide context.
+
+`ToastProvider` component manages the state of all toasts and <br/>must wrap your application (or a part of it) to provide context.
 
 ```tsx
-   import { ToastProvider } from "react-crisp-toast";
+import { ToastProvider } from "react-crisp-toast";
 
-   const App = () => (
-     <ToastProvider maxToasts={10}>
-       <YourApp />
-     </ToastProvider>
-   );
+const App = () => (
+  <ToastProvider maxToasts={10}>
+    <YourApp />
+  </ToastProvider>
+);
 
-   export default App;
+export default App;
 ```
+
+<br/>
+
 ### 2. Use the `useToast` hook to add toasts:
+
 ```tsx
 import { useToast } from "react-crisp-toast";
 
@@ -81,12 +86,11 @@ const ExampleComponent = () => {
   const { addToast } = useToast();
 
   const showToast = () => {
-    addToast({message: "This is a toast message!"});
+    addToast({ message: "This is a toast message!" });
   };
 
   return <button onClick={showToast}>Show Toast</button>;
 };
-
 ```
 
 <br/>
@@ -94,35 +98,34 @@ const ExampleComponent = () => {
 <br/>
 
 ## **Options**
+
 ### ToastProvider
 
-| **Prop**           | **Type**                                            | **Description**                                                                                                                                         | **Required** | **Default**            |
-|--------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|------------------------|
-| `maxToasts`        | number                                              | The maximum number of toasts that can be displayed at once.                                                                                             | No           | 5                      |
-| `soundEnabled`     | boolean                                             | Whether to enable sound for toast notifications.                                                                                                        | No           | false                  |
+| **Prop**       | **Type** | **Description**                                             | **Required** | **Default** |
+| -------------- | -------- | ----------------------------------------------------------- | ------------ | ----------- |
+| `maxToasts`    | number   | The maximum number of toasts that can be displayed at once. | No           | 5           |
+| `soundEnabled` | boolean  | Whether to enable sound for toast notifications.            | No           | false       |
 
-
----
+ <br/>
 
 ### addToast
 
 These are the parameters passed to the `addToast` function to create a toast notification.
 
-| **Name**           | **Type**                                            | **Description**                                                                                                                                         | **Required** | **Default**            |
-|--------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|------------------------|
-| `message`          | ReactNode                                           | The content/message to be displayed in the toast.                                                                                                      | Yes          | -                      |
-| `type`             | "success" \| "error" \| "warning" \| "info"        | The type of the toast.                                                                                                                                  | No          | info                      |
-| `duration`         | number                                              | How long the toast stays visible. Duration in milliseconds.                                                                                             | No           | 3000                   |
-| `position`         | object                                              | The position of the toast on the screen. Accepts an object with `vertical` and `horizontal` properties.                                                 | No           | { vertical: "top", horizontal: "right" } |
-| `position.vertical`| "top" \| "bottom"                                   | Vertical position of the toast.                                                                                                                        | No           | "top"                  |
-| `position.horizontal`| "left" \| "right" \| "center"                    | Horizontal position of the toast.                                                                                                                     | No           | "right"                |
-| `showCloseButton`  | boolean                                             | Whether to display a close button on the toast.                                                                                                        | No           | false                  |
-| `soundEnabled`     | boolean                                             | Whether to play a sound when the toast appears.                                                                                                        | No           | false                  |
+| **Name**              | **Type**                                    | **Description**                                                                                         | **Required** | **Default**                              |
+| --------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------ | ---------------------------------------- |
+| `message`             | ReactNode                                   | The content/message to be displayed in the toast.                                                       | Yes          | -                                        |
+| `type`                | "success" \| "error" \| "warning" \| "info" | The type of the toast.                                                                                  | No           | info                                     |
+| `duration`            | number                                      | How long the toast stays visible. Duration in milliseconds.                                             | No           | 3000                                     |
+| `position`            | object                                      | The position of the toast on the screen. Accepts an object with `vertical` and `horizontal` properties. | No           | { vertical: "top", horizontal: "right" } |
+| `position.vertical`   | "top" \| "bottom"                           | Vertical position of the toast.                                                                         | No           | "top"                                    |
+| `position.horizontal` | "left" \| "right" \| "center"               | Horizontal position of the toast.                                                                       | No           | "right"                                  |
+| `showCloseButton`     | boolean                                     | Whether to display a close button on the toast.                                                         | No           | false                                    |
+| `soundEnabled`        | boolean                                     | Whether to play a sound when the toast appears.                                                         | No           | false                                    |
 
 <br/>
 <br/>
 <br/>
-
 
 ## **License**
 
@@ -134,4 +137,4 @@ This project is licensed under the MIT License.
 
 ## **Sound Effect**
 
-The sound effects used in this project are sourced from the [Interface Sounds collection on Pixabay](https://pixabay.com/collections/interface-sounds-23710620/). These sounds are in the public domain and are free to use under the Pixabay Content License. 
+The sound effects used in this project are sourced from the [Interface Sounds collection on Pixabay](https://pixabay.com/collections/interface-sounds-23710620/). These sounds are in the public domain and are free to use under the Pixabay Content License.
