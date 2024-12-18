@@ -17,7 +17,7 @@ export interface ToastPosition {
 export interface Toast {
   id: string; // Use UUID for unique IDs
   message: ReactNode;
-  type: ToastType;
+  type?: ToastType;
   duration?: number;
   position?: ToastPosition;
   showCloseButton?: boolean;
