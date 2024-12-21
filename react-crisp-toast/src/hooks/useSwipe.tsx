@@ -1,37 +1,52 @@
-import React, { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const useSwipe = (onClose: (id: string) => void, id: string) => {
-  const [isSwiping, setIsSwiping] = useState(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
+  const isSwiping = useRef(false);
   const startX = useRef(0);
+  const ref = useRef<HTMLDivElement | null>(null);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    startX.current = e.touches[0].clientX;
-    setIsSwiping(true);
-  };
+  useEffect(() => {
+    const element = ref.current;
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isSwiping) return;
-    const currentX = e.touches[0].clientX;
-    const deltaX = currentX - startX.current;
-    setSwipeOffset(deltaX);
-  };
+    if (!element) return;
 
-  const handleTouchEnd = () => {
-    const threshold = 100; // Default threshold for swipe to close
-    if (Math.abs(swipeOffset) >= threshold) {
-      onClose(id);
-    } else {
+    const handleTouchStart = (e: TouchEvent) => {
+      startX.current = e.touches[0].clientX;
+      isSwiping.current = true;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isSwiping.current) return;
+      const currentX = e.touches[0].clientX;
+      const deltaX = currentX - startX.current;
+      setSwipeOffset(deltaX);
+    };
+
+    const handleTouchEnd = () => {
+      const threshold = 100; // Swipe threshold
+      if (Math.abs(swipeOffset) >= threshold) {
+        onClose(id); // Trigger close if swipe exceeds threshold
+      }
       setSwipeOffset(0);
-    }
-    setIsSwiping(false);
-  };
+      isSwiping.current = false;
+    };
+
+    // Attach event listeners
+    element.addEventListener("touchstart", handleTouchStart);
+    element.addEventListener("touchmove", handleTouchMove);
+    element.addEventListener("touchend", handleTouchEnd);
+
+    // Cleanup event listeners on unmount
+    return () => {
+      element.removeEventListener("touchstart", handleTouchStart);
+      element.removeEventListener("touchmove", handleTouchMove);
+      element.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [onClose, id, swipeOffset]);
 
   return {
-    isSwiping,
+    ref,
     swipeOffset,
-    handleTouchStart,
-    handleTouchMove,
-    handleTouchEnd,
   };
 };

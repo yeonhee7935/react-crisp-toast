@@ -1,3 +1,4 @@
+import { DEFAULT_FADE_OUT_DURATION } from "@src/constants";
 import { useEffect, useRef, useState } from "react";
 
 export const useToastTimer = (
@@ -11,7 +12,7 @@ export const useToastTimer = (
   useEffect(() => {
     timerRef.current = setTimeout(() => {
       setIsFading(true);
-      setTimeout(() => onClose(id), 500); // Fade-out duration
+      setTimeout(() => onClose(id), DEFAULT_FADE_OUT_DURATION); // Fade-out duration
     }, duration);
 
     return () => {
