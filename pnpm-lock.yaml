@@ -39,8 +39,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       react-crisp-toast:
-        specifier: ^1.0.2
-        version: 1.0.2(vite@6.0.3(@types/node@22.10.2))
+        specifier: ^1.1.0
+        version: 1.1.0(vite@6.0.3(@types/node@22.10.2))
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
@@ -85,8 +85,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       react-crisp-toast:
-        specifier: ^1.0.2
-        version: 1.0.2(vite@6.0.3(@types/node@22.10.2))
+        specifier: ^1.1.0
+        version: 1.1.0(vite@6.0.3(@types/node@22.10.2))
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
@@ -2549,8 +2549,8 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
-  react-crisp-toast@1.0.2:
-    resolution: {integrity: sha512-OMDbr7VIThM6dRGn2hZ8WLWmbmg7NK1P5zPSFM0kZIrKVCMCfj825V7DBbbkmiQQmLJf6MaCm8oQvBvK3KibYw==}
+  react-crisp-toast@1.1.0:
+    resolution: {integrity: sha512-AxzVSvZZvRf3Gl6t/eK4cigIQZ0gWPc0weQY4z8zU+Pe3ew5NCUjTZD7HFl73GFyP7iR/JrGQ8ubhqizPkaxOA==}
 
   react-dom@18.3.1:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
@@ -5662,7 +5662,7 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
-  react-crisp-toast@1.0.2(vite@6.0.3(@types/node@22.10.2)):
+  react-crisp-toast@1.1.0(vite@6.0.3(@types/node@22.10.2)):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
