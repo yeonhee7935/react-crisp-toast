@@ -1,5 +1,10 @@
 # **react-crisp-toast 🍞**
 
+[![Version](https://img.shields.io/npm/v/react-crisp-toast)](https://www.npmjs.com/package/react-crisp-toast) 
+[![License](https://img.shields.io/npm/l/react-crisp-toast)](https://opensource.org/licenses/MIT)
+[![NPM Downloads](https://img.shields.io/npm/dm/react-crisp-toast)](https://www.npmjs.com/package/react-crisp-toast)  
+
+
 ![readme](https://github.com/user-attachments/assets/d5ae8868-b8af-4898-96ca-8ae269ffd33c)
 
 Lightweight toast notification library for React.
@@ -11,7 +16,8 @@ Lightweight toast notification library for React.
 ## **Live Demo**
 
 Check out the live demo of react-crisp-toast in action: <br/>
-<a href="https://react-crisp-toast.vercel.app/">react-crisp-toast</a>
+<a href="https://react-crisp-toast.vercel.app/">👉 Demo1: Full Feature</a><br/>
+<a href="https://react-crisp-toast-kvpk.vercel.app/">👉 Demo2: Minimal</a>
 
 <br/>
 <br/>
