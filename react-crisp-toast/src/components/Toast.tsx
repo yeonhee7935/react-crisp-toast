@@ -1,3 +1,4 @@
+import React from "react"
 import { useState, useEffect, useRef } from "react";
 import { Toast as T, useToast } from "@src/context/ToastContext";
 import CloseIcon from "@src/components/CloseIcon";
