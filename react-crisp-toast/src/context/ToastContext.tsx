@@ -53,7 +53,7 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 const toastReducer = (state: ToastState, action: ToastAction): ToastState => {
   switch (action.type) {
     case "ADD_TOAST":
-      const newToast = { id: Date.now().toString(), ...action.toast };
+      const newToast = { id: crypto.randomUUID(), ...action.toast };
       if (state.toasts.length < state.maxToasts) {
         return { ...state, toasts: [...state.toasts, newToast] };
       } else {
