@@ -1,14 +1,13 @@
-import React from "react"
-import { useState, useEffect, useRef } from "react";
+import React, {useEffect} from "react";
 import { Toast as T, useToast } from "@src/context/ToastContext";
+import { useSwipe } from "../hooks/useSwipe"; 
+import { useToastTimer } from "../hooks/useToastTimer";  
 import CloseIcon from "@src/components/CloseIcon";
 import { playSound } from "@src/utils/sound";
 
 import {
   DEFAULT_DURATION,
-  DEFAULT_POSITION,
-  DEFAULT_FADE_OUT_DURATION,
-  DEFAULT_THRESHOLD,
+  DEFAULT_POSITION, 
   DEFAULT_TYPE,
 } from "../constants";
 
@@ -28,64 +27,22 @@ const Toast: React.FC<ToastProps> = ({
 }) => {
   const { soundEnabled: globalSoundEnabled } = useToast();
 
-  const [isSwiping, setIsSwiping] = useState(false);
-  const [swipeOffset, setSwipeOffset] = useState(0);
-  const [isFading, setIsFading] = useState(false);
-  const toastRef = useRef<HTMLDivElement | null>(null);
-  const startX = useRef(0);
-  const timerRef = useRef<number | null>(null);
+  const { isSwiping, swipeOffset, handleTouchStart, handleTouchMove, handleTouchEnd } =
+    useSwipe(onClose, id);
+  const { isFading } = useToastTimer(duration, id, onClose);
 
   useEffect(() => {
     if (soundEnabled !== undefined ? soundEnabled : globalSoundEnabled) {
       playSound(type);
     }
-    timerRef.current = setTimeout(() => {
-      setIsFading(true);
-      setTimeout(() => onClose(id), DEFAULT_FADE_OUT_DURATION);
-    }, duration);
-
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-    };
-  }, []);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    startX.current = e.touches[0].clientX;
-    setIsSwiping(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isSwiping) return;
-
-    const currentX = e.touches[0].clientX;
-    const deltaX = currentX - startX.current;
-
-    setSwipeOffset(deltaX);
-  };
-
-  const handleTouchEnd = () => {
-    const threshold = DEFAULT_THRESHOLD;
-
-    if (Math.abs(swipeOffset) >= threshold) {
-      onClose(id);
-    } else {
-      setSwipeOffset(0);
-    }
-
-    setIsSwiping(false);
-  };
+  }, [soundEnabled, globalSoundEnabled, type]);
 
   const { vertical, horizontal } = position;
 
   return (
     <div
       role="alert"
-      className={`toast toast-${type} ${horizontal} ${vertical} ${
-        isFading ? "fade-out" : ""
-      }`}
-      ref={toastRef}
+      className={`toast toast-${type} ${horizontal} ${vertical} ${isFading ? "fade-out" : ""}`}
       style={{
         transform: `translateX(${swipeOffset}px)`,
         transition: isSwiping ? "none" : "transform 0.3s ease-out",
