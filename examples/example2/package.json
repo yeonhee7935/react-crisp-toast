@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "react": "^18.3.1",
+    "react-crisp-toast": "^1.0.2",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
