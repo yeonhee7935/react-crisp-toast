@@ -1,4 +1,5 @@
 import {useToast} from "react-crisp-toast";
+import Image from "../favicon.png"
 
 function App() {
   const {addToast} = useToast()
@@ -10,7 +11,7 @@ function App() {
   return (
   <div style={{height:"90vh",flexDirection:"column", display:"flex", alignItems:"center", justifyContent:"center"}}>
      
-      <img src="../favicon.png" alt="logo" width={300}/>
+      <img src={Image} alt="logo" width={300}/>
       <br/>
       <button
         onClick={showToast}
