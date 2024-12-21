@@ -55,23 +55,11 @@ const toastReducer = (state: ToastState, action: ToastAction): ToastState => {
   switch (action.type) {
     case "ADD_TOAST":
       const newToast = { id: crypto.randomUUID(), ...action.toast };
-      if (state.toasts.length < state.maxToasts) {
-        return { ...state, toasts: [...state.toasts, newToast] };
-      } else {
-        return { ...state, queue: [...state.queue, newToast] };
-      }
+      return { ...state, toasts: [...state.toasts, newToast] };
     case "REMOVE_TOAST":
       const remainingToasts = state.toasts.filter(
         (toast) => toast.id !== action.id,
-      );
-      if (remainingToasts.length < state.maxToasts && state.queue.length > 0) {
-        const nextToast = state.queue[0];
-        return {
-          ...state,
-          toasts: [...remainingToasts, nextToast],
-          queue: state.queue.slice(1),
-        };
-      }
+      ); 
       return { ...state, toasts: remainingToasts };
     default:
       return state;
@@ -95,17 +83,26 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   };
 
   const groupedToasts = useMemo(() => {
+    let totalToasts = 0;  
     return state.toasts.reduce<Record<string, Toast[]>>((acc, toast) => {
+      if (totalToasts >= maxToasts) {
+        return acc; // Stop adding toasts if the total exceeds maxToasts
+      }
+  
       const { vertical, horizontal } = toast.position || {
         vertical: "top",
         horizontal: "right",
       };
       const positionKey = `${vertical}-${horizontal}`;
       acc[positionKey] = acc[positionKey] || [];
+      
+      // Add the toast to the group
       acc[positionKey].push(toast);
+      totalToasts++;
+  
       return acc;
     }, {});
-  }, [state.toasts]); // Recalculates only when `toasts` changes
+  }, [state.toasts]);  
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast, soundEnabled }}>
