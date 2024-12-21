@@ -16,8 +16,8 @@ Lightweight toast notification library for React.
 ## **Live Demo**
 
 Check out the live demo of react-crisp-toast in action: <br/>
-<a href="https://react-crisp-toast.vercel.app/">👉 Demo1</a><br/>
-<a href="https://react-crisp-toast-kvpk.vercel.app/">👉 Demo2</a>
+<a href="https://react-crisp-toast.vercel.app/">👉 Demo1: Full Feature</a><br/>
+<a href="https://react-crisp-toast-kvpk.vercel.app/">👉 Demo2: Minimal</a>
 
 <br/>
 <br/>
