@@ -1,5 +1,4 @@
 import React from "react";
-
 interface CloseIconProps {
   size?: number;
   color?: string;

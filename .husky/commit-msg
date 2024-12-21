@@ -53,7 +53,7 @@ if echo "$COMMIT_MESSAGE" | grep -qE "^\w+"; then
 fi
 
 # 커밋 메시지 규칙 검증
-if ! echo "$COMMIT_MESSAGE" | grep -qE "^:[a-zA-Z]+: .+"; then
+if ! echo "$COMMIT_MESSAGE" | grep -qE "^:[a-zA-Z_]+: .+"; then
   echo "❌ Please use gitmoji in your commit message"
   echo "Commit message should follow the pattern: ^:[a-zA-Z]+: .+"
   exit 1

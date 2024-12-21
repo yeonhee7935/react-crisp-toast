@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import Toast from "@src/components/Toast";
 import { Toast as ToastType } from "@src/context/ToastContext";
 
