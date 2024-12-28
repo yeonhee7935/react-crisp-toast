@@ -1,3 +1,5 @@
+# [v1.1.1](https://github.com/yeonhee7935/react-crisp-toast/compare/v1.1.0...v1.1.1) (2024-12-28)
+
 # [v1.1.0](https://github.com/yeonhee7935/react-crisp-toast/compare/v1.0.2...v1.1.0) (2024-12-18)
 
 ## ✨ New Features
